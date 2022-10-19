@@ -1,0 +1,32 @@
+---
+
+- name: Retrieve inventory hosts
+  ansible.builtin.uri:
+    url: "{{ tower_awx[awx_type][awx_env]['url'] }}{{ group.related.hosts }}"
+    user: "{{ tower_awx[awx_type][awx_env]['api_user'] }}"
+    password: "{{ tower_awx[awx_type][awx_env]['api_password'] }}"
+    method: GET
+    force_basic_auth: yes
+    status_code:
+      - 200
+      - 201
+  changed_when: false
+  register: _hosts
+  delegate_to: "{{ execution_host | default(omit) }}"
+  loop: "{{ _awx_inventory_add.stdout | from_json | json_query('results') }}"
+  loop_control:
+    loop_var: group
+    label:
+      - "{{ group.name }}"
+
+- name: Create dict with inventories & associated hosts
+  ansible.builtin.set_fact:
+    __inventory_hosts: >-
+      {{
+        ( __inventory_hosts | default({}) ) |
+        combine({ zzz.group.name: (zzz.json.results | json_query('[].name')) })
+      }}
+  loop: "{{ _hosts }}"
+  loop_control:
+    loop_var: zzz
+    label: "{{ zzz.group.name }}"

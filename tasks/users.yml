@@ -1,0 +1,21 @@
+---
+
+- name: Export 'users'
+  awx.awx.export:
+    controller_host: "{{ tower_awx[awx_type][awx_env]['url'] }}"
+    controller_username: "{{ tower_awx[awx_type][awx_env]['api_user'] if awx_token is undefined else omit }}"
+    controller_password: "{{ tower_awx[awx_type][awx_env]['api_password'] if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
+    validate_certs: "{{ tower_awx[awx_type][awx_env]['validate_certs'] }}"
+
+    users: all
+  register: _awx_users
+  delegate_to: "{{ execution_host | default(omit) }}"
+
+- name: Write 'users' to file
+  ansible.builtin.copy:
+    content: "{{ _awx_users | to_nice_json }}"
+    dest: "{{ awx_export_path + '/users.json' }}"
+    mode: "0640"
+  delegate_to: localhost
+  connection: local

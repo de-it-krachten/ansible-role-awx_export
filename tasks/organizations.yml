@@ -1,0 +1,21 @@
+---
+
+- name: Export 'organizations'
+  awx.awx.export:
+    controller_host: "{{ tower_awx[awx_type][awx_env]['url'] }}"
+    controller_username: "{{ tower_awx[awx_type][awx_env]['api_user'] if awx_token is undefined else omit }}"
+    controller_password: "{{ tower_awx[awx_type][awx_env]['api_password'] if awx_token is undefined else omit }}"
+    controller_oauthtoken: "{{ awx_token | default(omit) }}"
+    validate_certs: "{{ tower_awx[awx_type][awx_env]['validate_certs'] }}"
+
+    organizations: all
+  register: _awx_organizations
+  delegate_to: "{{ execution_host | default(omit) }}"
+
+- name: Write 'organizations' to file
+  ansible.builtin.copy:
+    content: "{{ _awx_organizations | to_nice_json }}"
+    dest: "{{ awx_export_path + '/organizations.json' }}"
+    mode: "0640"
+  delegate_to: localhost
+  connection: local

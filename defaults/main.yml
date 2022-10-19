@@ -1,0 +1,22 @@
+---
+
+awx_export_resources:
+  - settings
+  - credential_types
+  - credentials
+  # - execution_environments
+  - inventory
+  - inventory_sources
+  - job_templates
+  - notification_templates
+  - organizations
+  - projects
+  - teams
+  - users
+  - workflow_job_templates
+  - roles
+  - schedules
+  - applications
+  - system_job_templates
+  - groups
+  - hosts

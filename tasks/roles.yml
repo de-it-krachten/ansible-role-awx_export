@@ -1,0 +1,22 @@
+---
+
+- name: Export 'roles'
+  ansible.builtin.command: >-
+    {{ venv_awx }} roles list --all
+  environment:
+    TOWER_HOST: "{{ tower_awx[awx_type][awx_env]['url'] }}"
+    TOWER_USERNAME: "{{ tower_awx[awx_type][awx_env]['api_user'] if awx_token is undefined else omit }}"
+    TOWER_PASSWORD: "{{ tower_awx[awx_type][awx_env]['api_password'] if awx_token is undefined else omit }}"
+    TOWER_OAUTH_TOKEN: "{{ awx_token | default(omit) }}"
+    TOWER_VERIFY_SSL: "{{ tower_awx[awx_type][awx_env]['validate_certs'] }}"
+  changed_when: false
+  register: _awx_roles
+  delegate_to: "{{ execution_host | default(omit) }}"
+
+- name: Write 'roles' to file
+  ansible.builtin.copy:
+    content: "{{ _awx_roles.stdout | from_json | json_query('results') | to_nice_json }}"
+    dest: "{{ awx_export_path + '/roles.json' }}"
+    mode: "0640"
+  delegate_to: localhost
+  connection: local
