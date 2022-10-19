@@ -2,14 +2,12 @@
 
 - name: Set different python interpreter for AWX/Tower
   ansible.builtin.set_fact:
-    ansible_python_interpreter: "{{ venv_python }}"
-  when: inventory_hostname in groups['awx_primary'] or inventory_hostname in groups['tower_primary']
+    ansible_python_interpreter: "{{ awx_python_interpreter }}"
+  when: awx_python_interpreter is defined
 
 - name: Asserts
   ansible.builtin.assert:
     that:
-      - awx_type is defined
-      - awx_env is defined
       - awx_export_path is defined
 
 - name: Create export path
@@ -17,14 +15,15 @@
     path: "{{ awx_export_path }}"
     state: directory
     mode: "0700"
-  delegate_to: localhost
-  connection: local
+  delegate_to: "{{ awx_execution_host }}"
+
+- name: Obtain token
+  ansible.builtin.include_tasks:
+    file: token.yml
 
 - name: Export all resources
   ansible.builtin.include_tasks:
     file: "{{ awx_resource }}.yml"
-  vars:
-    awx_command: "{{ awx_resource }}"
   loop: "{{ awx_export_resources }}"
   loop_control:
     loop_var: awx_resource

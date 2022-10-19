@@ -2,9 +2,9 @@
 
 - name: Retrieve inventory hosts
   ansible.builtin.uri:
-    url: "{{ tower_awx[awx_type][awx_env]['url'] }}{{ group.related.hosts }}"
-    user: "{{ tower_awx[awx_type][awx_env]['api_user'] }}"
-    password: "{{ tower_awx[awx_type][awx_env]['api_password'] }}"
+    url: "{{ awx_url }}{{ group.related.hosts }}"
+    user: "{{ awx_username }}"
+    password: "{{ awx_password }}"
     method: GET
     force_basic_auth: yes
     status_code:

@@ -2,13 +2,13 @@
 
 - name: Export 'system_job_templates'
   ansible.builtin.command: >-
-    {{ venv_awx }} system_job_templates list --all
+    {{ awx_command }} system_job_templates list --all
   environment:
-    TOWER_HOST: "{{ tower_awx[awx_type][awx_env]['url'] }}"
-    TOWER_USERNAME: "{{ tower_awx[awx_type][awx_env]['api_user'] if awx_token is undefined else omit }}"
-    TOWER_PASSWORD: "{{ tower_awx[awx_type][awx_env]['api_password'] if awx_token is undefined else omit }}"
+    TOWER_HOST: "{{ awx_url }}"
+    TOWER_USERNAME: "{{ awx_username if awx_token is undefined else omit }}"
+    TOWER_PASSWORD: "{{ awx_password if awx_token is undefined else omit }}"
     TOWER_OAUTH_TOKEN: "{{ awx_token | default(omit) }}"
-    TOWER_VERIFY_SSL: "{{ tower_awx[awx_type][awx_env]['validate_certs'] }}"
+    TOWER_VERIFY_SSL: "{{ awx_verify_ssl }}"
   changed_when: false
   register: _awx_system_job_templates
   delegate_to: "{{ execution_host | default(omit) }}"
