@@ -1,5 +1,30 @@
 ---
 
+# Use non default virtual env
+# awx_python_interpreter: /virtenv/awx/bin/python3
+
+# Full path to the awxkit / awx command
+awx_command: awx
+
+# Host to execute code from
+awx_execution_host: localhost
+
+# AWX url
+awx_url: https://127.0.0.1
+
+# AWX username to use
+awx_username: admin
+
+# AWX password to use
+awx_password: admin
+
+# Should SSL/TLS verification be done
+awx_verify_ssl: false
+
+# Location where to export files to
+# awx_export_path: /tmp/awx
+
+# List of resources to export
 awx_export_resources:
   - settings
   - credential_types

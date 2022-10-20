@@ -1,0 +1,9 @@
+---
+
+- hosts: all
+  become: yes
+  tasks:
+    - name: Install awxkit
+      pip:
+        name: awxkit
+        version: 15.0.1
