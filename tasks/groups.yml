@@ -24,3 +24,88 @@
     mode: "0640"
   delegate_to: localhost
   connection: local
+
+- name: Refresh extended group info
+  when: awx_group_refresh is undefined
+  block:
+
+    - name: For each group, get children (nested groups)
+      ansible.builtin.uri:
+        url: "{{ awx_url }}{{ item.related.children }}"
+        headers:
+          "Content-Type": "application/json"
+          "Authorization": "Bearer {{ awx_token }}"
+      loop: "{{ lookup('file', awx_export_path + '/groups.json') | from_json }}"
+      loop_control:
+        label:
+          - "{{ item.name }}"
+      register: __children
+
+    - name: Save group-children to file
+      ansible.builtin.copy:
+        content: "{{ __children.results | to_nice_json }}"
+        dest: /tmp/children.json
+        mode: "0640"
+      delegate_to: localhost
+      connection: local
+
+    - name: For each group, get hosts
+      ansible.builtin.uri:
+        url: "{{ awx_url }}{{ item.related.hosts }}"
+        headers:
+          "Content-Type": "application/json"
+          "Authorization": "Bearer {{ awx_token }}"
+      loop: "{{ lookup('file', awx_export_path + '/groups.json') | from_json }}"
+      loop_control:
+        label:
+          - "{{ item.name }}"
+      register: __hosts
+
+    - name: Save group-hosts to file
+      ansible.builtin.copy:
+        content: "{{ __hosts.results | to_nice_json }}"
+        dest: /tmp/hosts.json
+        mode: "0640"
+      delegate_to: localhost
+      connection: local
+
+- name: Load group info from file (children/hosts)
+  ansible.builtin.set_fact:
+    __group_children: "{{ lookup('file', '/tmp/children.json') | from_json }}"
+    __group_hosts: "{{ lookup('file', '/tmp/hosts.json') | from_json }}"
+
+- name: Contruct simplifed dict of groups vs children
+  ansible.builtin.set_fact:
+    groups1: >-
+      {
+        {% for item in __group_children %}
+        "{{ item.item.name }}-{{ item.item.id }}": {
+          "id": {{ item.item.id }},
+          "name": "{{ item.item.name }}",
+          "inventory": {
+            "name": "{{ item.item.summary_fields.inventory.name }}",
+            "id": {{ item.item.inventory }}
+          },
+          "children": {{ item.json.results | json_query('[].name') }}
+        }{{ ',' if not loop.last else '' }}
+        {% endfor %}
+      }
+
+- name: Contruct simplifed dict of groups vs hosts
+  ansible.builtin.set_fact:
+    hosts1: >-
+      {
+        {% for item in __group_hosts %}
+        "{{ item.item.name }}-{{ item.item.id }}": {
+          "hosts": {{ item.json.results | json_query('[].name') }}
+        }{{ ',' if not loop.last else '' }}
+        {% endfor %}
+      }
+
+- name: Save combined dict of groups, children & hosts
+  ansible.builtin.copy:
+    content: "{{ groups1 | combine(hosts1, recursive=True) | to_nice_json }}"
+    dest: "{{ awx_export_path + '/groups+children+hosts.json' }}"
+    mode: "0640"
+  delegate_to: localhost
+  connection: local
