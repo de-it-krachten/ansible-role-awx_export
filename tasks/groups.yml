@@ -32,6 +32,7 @@
     - name: For each group, get children (nested groups)
       ansible.builtin.uri:
         url: "{{ awx_url }}{{ item.related.children }}"
+        validate_certs: "{{ awx_verify_ssl }}"
         headers:
           "Content-Type": "application/json"
           "Authorization": "Bearer {{ awx_token }}"
@@ -52,6 +53,7 @@
     - name: For each group, get hosts
       ansible.builtin.uri:
         url: "{{ awx_url }}{{ item.related.hosts }}"
+        validate_certs: "{{ awx_verify_ssl }}"
         headers:
           "Content-Type": "application/json"
           "Authorization": "Bearer {{ awx_token }}"
