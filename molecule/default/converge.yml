@@ -1,6 +1,7 @@
 ---
 
-- ansible.builtin.import_playbook: converge-pre.yml
+- name: Converge pre playbook
+  ansible.builtin.import_playbook: converge-pre.yml
 
 - name: Converge
   hosts: all
