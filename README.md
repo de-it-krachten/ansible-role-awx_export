@@ -14,7 +14,7 @@ None
 
 #### Collections
 - community.general
-- awx.awx
+- awx.awx:21.7.0
 
 ## Platforms
 
