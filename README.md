@@ -94,6 +94,7 @@ awx_export_resources:
 <pre><code>
 - name: sample playbook for role 'awx_export' pre playbook
   ansible.builtin.import_playbook: converge-pre.yml
+  when: molecule_converge_pre is undefined or molecule_converge_pre | bool
 
 - name: sample playbook for role 'awx_export'
   hosts: all
