@@ -1,3 +1,10 @@
+## [1.1.1](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.1.0...v1.1.1) (2023-05-06)
+
+
+### Bug Fixes
+
+* SSL validation toggle is now added to all uri tasks ([d56df79](https://github.com/de-it-krachten/ansible-role-awx_export/commit/d56df79d69254b5f74459fc0a80468eb0617aaad))
+
 # [1.1.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.0.0...v1.1.0) (2022-10-24)
 
 
