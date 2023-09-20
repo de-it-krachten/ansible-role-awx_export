@@ -38,8 +38,7 @@
           "Authorization": "Bearer {{ awx_token }}"
       loop: "{{ lookup('file', awx_export_path + '/groups.json') | from_json }}"
       loop_control:
-        label:
-          - "{{ item.name }}"
+        label: "{{ item.name }}"
       register: __children
 
     - name: Save group-children to file
@@ -59,8 +58,7 @@
           "Authorization": "Bearer {{ awx_token }}"
       loop: "{{ lookup('file', awx_export_path + '/groups.json') | from_json }}"
       loop_control:
-        label:
-          - "{{ item.name }}"
+        label: "{{ item.name }}"
       register: __hosts
 
     - name: Save group-hosts to file

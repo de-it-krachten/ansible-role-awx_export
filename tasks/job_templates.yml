@@ -18,3 +18,24 @@
     mode: "0640"
   delegate_to: localhost
   connection: local
+
+# - name: Export 'job_templates'
+#   ansible.builtin.command: >-
+#     {{ awx_command }} job_templates list --all
+#   environment:
+#     TOWER_HOST: "{{ awx_url }}"
+#     TOWER_USERNAME: "{{ awx_username if awx_token is undefined else omit }}"
+#     TOWER_PASSWORD: "{{ awx_password if awx_token is undefined else omit }}"
+#     TOWER_OAUTH_TOKEN: "{{ awx_token | default(omit) }}"
+#     TOWER_VERIFY_SSL: "{{ awx_verify_ssl }}"
+#   changed_when: false
+#   register: _awx_job_templates
+#   delegate_to: "{{ execution_host | default(omit) }}"
+#
+# - name: Write 'job_templates' to file
+#   ansible.builtin.copy:
+#     content: "{{ _awx_job_templates.stdout | from_json | json_query('results') | to_nice_json }}"
+#     dest: "{{ awx_export_path + '/job_templates.json' }}"
+#     mode: "0640"
+#   delegate_to: localhost
+#   connection: local
