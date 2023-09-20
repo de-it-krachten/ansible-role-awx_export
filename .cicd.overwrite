@@ -57,10 +57,19 @@ platforms:
   almalinux9:
     ci: false
     supported: true
+  opensuse15:
+    ci: false
+    supported: false
+  sles15:
+    ci: false
+    supported: false
   debian10:
     ci: false
     supported: false
   debian11:
+    ci: false
+    supported: true
+  debian12:
     ci: false
     supported: true
   ubuntu1804:
@@ -72,10 +81,10 @@ platforms:
   ubuntu2204:
     ci: false
     supported: true
-  fedora36:
+  fedora37:
     ci: false
     supported: false
-  fedora37:
+  fedora38:
     ci: false
     supported: true
   alpine:
