@@ -1,3 +1,15 @@
+# [1.2.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.1.1...v1.2.0) (2023-09-20)
+
+
+### Bug Fixes
+
+* Change loop/label for latest ansible ([cb78731](https://github.com/de-it-krachten/ansible-role-awx_export/commit/cb78731d6641776620ee62ef91af17b5947c5482))
+
+
+### Features
+
+* Update supported platforms & CI ([60693c4](https://github.com/de-it-krachten/ansible-role-awx_export/commit/60693c425bbd5b37c50beac12972fa12927255bd))
+
 ## [1.1.1](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.1.0...v1.1.1) (2023-05-06)
 
 
