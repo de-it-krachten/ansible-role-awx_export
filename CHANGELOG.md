@@ -1,3 +1,10 @@
+## [1.2.1](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.2.0...v1.2.1) (2023-09-22)
+
+
+### Bug Fixes
+
+* Retrieve token when running in check-mode ([816516c](https://github.com/de-it-krachten/ansible-role-awx_export/commit/816516cd2344668a6c5430054dc686e4cf430770))
+
 # [1.2.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.1.1...v1.2.0) (2023-09-20)
 
 
