@@ -13,8 +13,7 @@ export AWX configuration into JSON
 None
 
 #### Collections
-- community.general
-- awx.awx:21.7.0
+- awx.awx
 
 ## Platforms
 
@@ -96,10 +95,9 @@ awx_export_resources:
 - name: sample playbook for role 'awx_export' pre playbook
   ansible.builtin.import_playbook: converge-pre.yml
   when: molecule_converge_pre is undefined or molecule_converge_pre | bool
-
 - name: sample playbook for role 'awx_export'
   hosts: all
-  become: "no"
+  become: 'no'
   vars:
     awx_command: /usr/local/bin/awx
     awx_export_path: /tmp/awx

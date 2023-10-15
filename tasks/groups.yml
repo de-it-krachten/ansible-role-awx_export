@@ -40,6 +40,7 @@
       loop_control:
         label: "{{ item.name }}"
       register: __children
+      delegate_to: "{{ execution_host | default(omit) }}"
 
     - name: Save group-children to file
       ansible.builtin.copy:
@@ -60,6 +61,7 @@
       loop_control:
         label: "{{ item.name }}"
       register: __hosts
+      delegate_to: "{{ execution_host | default(omit) }}"
 
     - name: Save group-hosts to file
       ansible.builtin.copy:
