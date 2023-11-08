@@ -11,6 +11,7 @@
   check_mode: false
   changed_when: false
   register: _awx_oauth
+  delegate_to: "{{ execution_host | default(omit) }}"
 
 - name: Save token
   ansible.builtin.set_fact:
