@@ -1,3 +1,11 @@
+## [1.2.2](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.2.1...v1.2.2) (2023-11-08)
+
+
+### Bug Fixes
+
+* Add optional delegation for token retrieval ([7f5a64c](https://github.com/de-it-krachten/ansible-role-awx_export/commit/7f5a64cab0e9e415a4e209d5ea91920153cc523b))
+* optional delegation for group exporting ([08ed899](https://github.com/de-it-krachten/ansible-role-awx_export/commit/08ed89983037b379bacbbc361cc2c675ba27aab9))
+
 ## [1.2.1](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.2.0...v1.2.1) (2023-09-22)
 
 
