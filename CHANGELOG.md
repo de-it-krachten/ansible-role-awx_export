@@ -1,3 +1,10 @@
+# [1.4.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.3.0...v1.4.0) (2024-12-29)
+
+
+### Features
+
+* Update supported platforms & CI ([8769c46](https://github.com/de-it-krachten/ansible-role-awx_export/commit/8769c46ccdebc00608c84b00f5e86ae4d4e66cc8))
+
 # [1.3.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.2.2...v1.3.0) (2024-06-03)
 
 
