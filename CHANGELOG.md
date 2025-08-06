@@ -1,3 +1,14 @@
+# [1.5.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.4.0...v1.5.0) (2025-08-06)
+
+
+### Features
+
+* Add support for AlmaLinux 10 ([64a7020](https://github.com/de-it-krachten/ansible-role-awx_export/commit/64a70203420dbb5ac64f94cd760e030e8576156a))
+* Add support for Debian 13 (Trixie) ([885d32c](https://github.com/de-it-krachten/ansible-role-awx_export/commit/885d32c71417af03d29a804169b3b0dfec4232bd))
+* Add support for OracleLinux 10 ([6db6af8](https://github.com/de-it-krachten/ansible-role-awx_export/commit/6db6af8ba800844cae1f9296a6553cb0a8045743))
+* Add support for Red Hat Enterprise Linux 10 ([6a5a648](https://github.com/de-it-krachten/ansible-role-awx_export/commit/6a5a6485c006c35a1496a2598b7ffadad80fd39b))
+* Add support for RockyLinux 10 ([511f361](https://github.com/de-it-krachten/ansible-role-awx_export/commit/511f361757cb4bbd3c6a94ce45ce7ed282a03f66))
+
 # [1.4.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.3.0...v1.4.0) (2024-12-29)
 
 
