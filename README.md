@@ -38,9 +38,11 @@ Supported platforms
 - Ubuntu 22.04 LTS<sup>1</sup>
 - Ubuntu 24.04 LTS<sup>1</sup>
 - Fedora 42<sup>1</sup>
+- Fedora 43<sup>1</sup>
 
 Note:
 <sup>1</sup> : no automated testing is performed on these platforms
+
 
 ## Role Variables
 ### defaults/main.yml
@@ -105,6 +107,7 @@ awx_export_resources:
   hosts: all
   become: 'no'
   vars:
+    molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
     awx_command: /usr/local/bin/awx
     awx_export_path: /tmp/awx
   tasks:
