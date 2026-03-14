@@ -9,7 +9,7 @@
     validate_certs: "{{ awx_verify_ssl }}"
     organizations: all
   register: _awx_organizations
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'organizations' to file
   ansible.builtin.copy:

@@ -11,7 +11,7 @@
     TOWER_VERIFY_SSL: "{{ awx_verify_ssl }}"
   changed_when: false
   register: _awx_settings
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'settings' to file
   ansible.builtin.copy:

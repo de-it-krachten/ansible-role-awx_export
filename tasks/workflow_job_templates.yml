@@ -9,7 +9,7 @@
     validate_certs: "{{ awx_verify_ssl }}"
     workflow_job_templates: all
   register: _awx_workflow_job_templates
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'workflow_job_templates' to file
   ansible.builtin.copy:

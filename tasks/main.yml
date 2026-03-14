@@ -10,12 +10,22 @@
     that:
       - awx_export_path is defined
 
+- name: Display collection version
+  ansible.builtin.debug:
+    msg: "awx.awx collection version : {{ lookup('community.general.collection_version', 'awx.awx') }}"
+  when: awx_execution_host is defined and awx_execution_host == 'localhost'
+
+- name: Display awxkit version
+  ansible.builtin.debug:
+    msg: "awxkit version : {{ lookup('pipe', 'awx --version') }}"
+  when: awx_execution_host is defined and awx_execution_host == 'localhost'
+
 - name: Create export path
   ansible.builtin.file:
     path: "{{ awx_export_path }}"
     state: directory
     mode: "0700"
-  delegate_to: "{{ awx_execution_host }}"
+  delegate_to: localhost
 
 - name: Obtain token
   ansible.builtin.include_tasks:

@@ -7,7 +7,7 @@
 awx_command: awx
 
 # Host to execute code from
-awx_execution_host: localhost
+# awx_execution_host: localhost
 
 # AWX url
 awx_url: https://127.0.0.1

@@ -10,7 +10,7 @@ export AWX configuration into JSON
 ## Dependencies
 
 #### Roles
-None
+- deitkrachten.awx_cli
 
 #### Collections
 - awx.awx
@@ -25,7 +25,7 @@ Supported platforms
 - RockyLinux 8<sup>1</sup>
 - RockyLinux 9<sup>1</sup>
 - RockyLinux 10<sup>1</sup>
-- OracleLinux 8
+- OracleLinux 8<sup>1</sup>
 - OracleLinux 9<sup>1</sup>
 - OracleLinux 10<sup>1</sup>
 - AlmaLinux 8<sup>1</sup>
@@ -54,7 +54,7 @@ Note:
 awx_command: awx
 
 # Host to execute code from
-awx_execution_host: localhost
+# awx_execution_host: localhost
 
 # AWX url
 awx_url: https://127.0.0.1
@@ -110,6 +110,10 @@ awx_export_resources:
     molecule_driver: '{{ lookup(''env'', ''MOLECULE_DRIVER_NAME'') }}'
     awx_command: /usr/local/bin/awx
     awx_export_path: /tmp/awx
+    awx_url: https://127.0.0.1
+    awx_username: admin
+    awx_password: Admin123!
+    awx_verify_ssl: false
   tasks:
     - name: Include role 'awx_export'
       ansible.builtin.include_role:

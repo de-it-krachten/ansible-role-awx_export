@@ -9,7 +9,7 @@
     validate_certs: "{{ awx_verify_ssl }}"
     users: all
   register: _awx_users
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'users' to file
   ansible.builtin.copy:

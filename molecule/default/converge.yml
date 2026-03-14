@@ -11,6 +11,10 @@
     molecule_driver: "{{ lookup('env', 'MOLECULE_DRIVER_NAME') }}"
     awx_command: /usr/local/bin/awx
     awx_export_path: /tmp/awx
+    awx_url: https://127.0.0.1
+    awx_username: admin
+    awx_password: Admin123!
+    awx_verify_ssl: False
   tasks:
     - name: Include role 'ansible-role-awx_export'
       ansible.builtin.include_role:
