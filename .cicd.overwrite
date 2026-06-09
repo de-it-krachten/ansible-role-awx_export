@@ -88,6 +88,7 @@ molecule:
     pre: converge-pre.yml
     become: "no"
     vars:
+      awx_python_interpreter: /usr/local/venv/awxkit/bin/python3
       awx_command: /usr/local/bin/awx
       awx_export_path: /tmp/awx
       awx_url: https://127.0.0.1
