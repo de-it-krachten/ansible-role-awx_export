@@ -78,31 +78,11 @@
 
 - name: Contruct simplifed dict of groups vs children
   ansible.builtin.set_fact:
-    groups1: >-
-      {
-        {% for item in __group_children %}
-        "{{ item.item.name }}-{{ item.item.id }}": {
-          "id": {{ item.item.id }},
-          "name": "{{ item.item.name }}",
-          "inventory": {
-            "name": "{{ item.item.summary_fields.inventory.name }}",
-            "id": {{ item.item.inventory }}
-          },
-          "children": {{ item.json.results | json_query('[].name') }}
-        }{{ ',' if not loop.last else '' }}
-        {% endfor %}
-      }
+    groups1: "{{ lookup('template', 'groups.yml.j2') | from_yaml | default({}, true) }}"
 
 - name: Contruct simplifed dict of groups vs hosts
   ansible.builtin.set_fact:
-    hosts1: >-
-      {
-        {% for item in __group_hosts %}
-        "{{ item.item.name }}-{{ item.item.id }}": {
-          "hosts": {{ item.json.results | json_query('[].name') }}
-        }{{ ',' if not loop.last else '' }}
-        {% endfor %}
-      }
+    hosts1: "{{ lookup('template', 'hosts.yml.j2') | from_yaml | default({}, true) }}"
 
 - name: Save combined dict of groups, children & hosts
   ansible.builtin.copy:
