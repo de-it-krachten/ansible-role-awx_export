@@ -1,3 +1,18 @@
+# [1.6.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.5.0...v1.6.0) (2026-08-04)
+
+
+### Bug Fixes
+
+* Add ansible-core 2.20+ compatibility ([004316d](https://github.com/de-it-krachten/ansible-role-awx_export/commit/004316d97ddb93094dce824532dd02b1e934edc5))
+
+
+### Features
+
+* Added support for Fedora 43 ([88532bc](https://github.com/de-it-krachten/ansible-role-awx_export/commit/88532bccba8d093d84ba0e5a8a60a665db67ff5a))
+* Added support for Fedora 44 ([723d767](https://github.com/de-it-krachten/ansible-role-awx_export/commit/723d76712541c0950e934855f38ceff3e3cfaa5b))
+* Added support for Ubuntu 26.04 LTS ([8b4a413](https://github.com/de-it-krachten/ansible-role-awx_export/commit/8b4a413b054d4ec1a2dc912da1ec4db6180813e4))
+* Drop support for Fedora 42 ([038ff65](https://github.com/de-it-krachten/ansible-role-awx_export/commit/038ff65b19231d9457ee05145af43669ea42d350))
+
 # [1.5.0](https://github.com/de-it-krachten/ansible-role-awx_export/compare/v1.4.0...v1.5.0) (2025-08-06)
 
 
