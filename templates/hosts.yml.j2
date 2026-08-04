@@ -1,0 +1,5 @@
+---
+{% for item in __group_hosts %}
+{{ item.item.name }}-{{ item.item.id }}:
+  hosts: {{ item.json.results | json_query('[].name') }}
+{% endfor %}

@@ -1,0 +1,11 @@
+---
+
+{% for item in __group_children %}
+{{ item.item.name }}-{{ item.item.id }}:
+  id: {{ item.item.id }}
+  name: {{ item.item.name }}
+  inventory:
+    name: {{ item.item.summary_fields.inventory.name }}
+    id: {{ item.item.inventory }}
+  children: {{ item.json.results | json_query('[].name') }}
+{% endfor %}

@@ -9,7 +9,7 @@
     validate_certs: "{{ awx_verify_ssl }}"
     teams: all
   register: _awx_teams
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'teams' to file
   ansible.builtin.copy:

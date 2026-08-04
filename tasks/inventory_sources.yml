@@ -9,7 +9,7 @@
     validate_certs: "{{ awx_verify_ssl }}"
     inventory_sources: all
   register: _awx_inventory_sources
-  delegate_to: "{{ execution_host | default(omit) }}"
+  delegate_to: "{{ awx_execution_host | default(omit) }}"
 
 - name: Write 'inventory_sources' to file
   ansible.builtin.copy:
